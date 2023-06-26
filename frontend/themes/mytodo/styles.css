@@ -1,0 +1,9 @@
+.user-card {
+  border-radius: var(--lumo-border-radius-m);
+  box-shadow: var(--lumo-box-shadow-s);
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+}
+
+html {
+}
