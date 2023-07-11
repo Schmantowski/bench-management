@@ -2,6 +2,7 @@ package com.example.application.components;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 
@@ -9,15 +10,18 @@ public class UserCard extends Div {
     private Text name;
     private TextField detailsField;
 
-    public UserCard(String userName) {
-        name = new Text(userName);
-        //name.getStyle().set("font-weight", "bold");
+    private Icon deleteCardIcon;
 
+    public UserCard(String userName) {
+        addClassName("user-card");
+        name = new Text(userName);
         detailsField = new TextField("Detail");
 
-        addClassName("user-card");
+        deleteCardIcon = new Icon("lumo", "cross");
+        deleteCardIcon.addClassName("delete-card-icon");
 
-        add(new VerticalLayout(name, detailsField));
+        add(deleteCardIcon, new VerticalLayout(name, detailsField));
+
     }
 
     public void setUserName(String userName) {

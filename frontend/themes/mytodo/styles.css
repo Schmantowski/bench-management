@@ -10,5 +10,9 @@
   margin-left: 0.5em;
 }
 
+.delete-card-icon {
+float: right;
+}
+
 html {
 }
