@@ -1,6 +1,8 @@
 package com.example.application.views.main;
 
-import com.example.application.logic.UserCardGenerator;
+import com.example.application.components.UserCard;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.Icon;
@@ -12,6 +14,9 @@ import com.vaadin.flow.router.Route;
 
 @Route("")
 public class AppView extends AppLayout {
+
+    public FlexLayout contentLayout;
+
     public AppView() {
         H1 title = new H1("Bench Management");
         title.getStyle().set("font-size", "var(--lumo-font-size-l)")
@@ -26,10 +31,20 @@ public class AppView extends AppLayout {
         // Add Item Icon
         Icon plusIcon = new Icon("lumo", "plus");
         plusIcon.addClassName("plus-icon");
+        plusIcon.addSingleClickListener(new ComponentEventListener<ClickEvent<Icon>>() {
+            @Override
+            public void onComponentEvent(ClickEvent<Icon> iconClickEvent) {
+                contentLayout.add(new UserCard("Anton"));
+                contentLayout.remove(plusIcon);
+                contentLayout.add(plusIcon);
+            }
+        });
 
         // content
-        FlexLayout contentLayout = new FlexLayout(UserCardGenerator.getUserCardHorizontalLayoutWithData(), plusIcon);
+        FlexLayout contentLayout = new FlexLayout(new UserCard("Earth"), new UserCard("Sun"), new UserCard("moon"), plusIcon);
         contentLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+        contentLayout.setFlexWrap(FlexLayout.FlexWrap.WRAP);
+        this.contentLayout = contentLayout;
         setContent(contentLayout);
 
     }
