@@ -3,6 +3,7 @@ package com.example.application.views.main;
 import com.example.application.logic.UserCardGenerator;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -17,14 +18,19 @@ public class AppView extends AppLayout {
                 .set("left", "var(--lumo-space-l)").set("margin", "0")
                 .set("position", "absolute");
 
+        // Tabs
         Tabs tabs = getTabs();
         tabs.getStyle().set("margin", "0 auto");
-
         addToNavbar(createTopBar(title, tabs));
 
+        // Add Item Icon
+        Icon plusIcon = new Icon("lumo", "plus");
+        plusIcon.addClassName("plus-icon");
 
         // content
-        setContent(UserCardGenerator.getUserCardHorizontalLayoutWithData());
+        FlexLayout contentLayout = new FlexLayout(UserCardGenerator.getUserCardHorizontalLayoutWithData(), plusIcon);
+        contentLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+        setContent(contentLayout);
 
     }
 
